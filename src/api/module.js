@@ -12,8 +12,18 @@ export default {
             body: JSON.stringify(sprint)
         }).then(response => response.json())
     },
-    postUser(user) {
-        return fetch(`${url}/users`, {
+    login(user) {
+        return fetch(`${url}/login`, {
+            method: 'POST',
+            headers: {
+                "Content-type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify(user)
+        }).then(response => response.json())
+    },
+    register(user) {
+        return fetch(`${url}/register`, {
             method: 'POST',
             headers: {
                 "Content-type": "application/json",

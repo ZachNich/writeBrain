@@ -9,12 +9,12 @@ const Login = props => {
     
     const handleFieldChange = e => {
         const stateToChange = {...user}
-        stateToChange[e.target.id] = e.target.value
+        stateToChange[e.target.id.split("-")[1]] = e.target.value
         setUser(stateToChange)
     }
 
     const handleLogin = props => {
-        ApiManager.postUser(user)
+        ApiManager.login(user)
             .then(response => {
                 if ("valid" in response && response.valid && "token" in response) {
                     localStorage.setItem("writeBrain_token", response.token)
@@ -23,7 +23,7 @@ const Login = props => {
     }
 
     const handleRegister = props => {
-        ApiManager.postUser(user)
+        ApiManager.register(user)
             .then(response => {
                 if ("token" in response) {
                     localStorage.setItem("writeBrain_token", response.token)
