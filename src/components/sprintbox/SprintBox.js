@@ -22,6 +22,7 @@ const SprintBox = props => {
             mood_before: 1,
             mood_after: 2
         }
+        console.log(sprint)
         ApiManager.postSprint(sprint)
     }
 
