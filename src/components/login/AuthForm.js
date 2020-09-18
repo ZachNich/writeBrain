@@ -12,15 +12,17 @@ const AuthForm = props => {
             .then(response => {
                 if ("valid" in response && response.valid && "token" in response) {
                     localStorage.setItem("writeBrain_token", response.token)
+                    props.setIsAuthenticated(true)
                 }
             })
-    }
-
-    const handleRegister = props => {
-        ApiManager.register(user)
+        }
+        
+        const handleRegister = props => {
+            ApiManager.register(user)
             .then(response => {
                 if ("token" in response) {
                     localStorage.setItem("writeBrain_token", response.token)
+                    props.setIsAuthenticated(true)
                 }
             })
     }
