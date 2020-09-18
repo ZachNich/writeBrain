@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Button from 'react-bootstrap/Button'
+import ApiManager from '../../api/module' 
 
 const SprintBox = props => {
     const [input, setInput] = useState('')
@@ -14,7 +15,15 @@ const SprintBox = props => {
     }
 
     const saveSprint = e => {
-        console.log(input)
+        const sprint = {
+            body: input,
+            started_at: new Date(),
+            story_id: 1,
+            mood_before_id: 1,
+            mood_after_id: 2
+        }
+        console.log(sprint)
+        ApiManager.postSprint(sprint)
     }
 
     return (
@@ -22,7 +31,7 @@ const SprintBox = props => {
             <input 
                 className="sprint_input" 
                 type="textarea" 
-                maxlength="500000" 
+                maxLength="500000" 
                 placeholder="Write your sprint here"
                 onChange={handleFieldChange}
                 value={input}
