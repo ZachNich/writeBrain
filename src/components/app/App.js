@@ -1,12 +1,16 @@
-import React from 'react';
-import './App.css';
+import React, { useState } from 'react'
+import './App.css'
 import SprintBox from '../sprintbox/SprintBox'
 import Login from '../login/Login'
+import StoryBar from '../storybar/StoryBar'
 
 const App = () => {
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
+
   return (
     <div className="main_container">
-      <Login />
+      <Login isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />
+      <StoryBar />
       <SprintBox />
     </div>
   );

@@ -31,5 +31,25 @@ export default {
             },
             body: JSON.stringify(user)
         }).then(response => response.json())
+    },
+    getStories() {
+        return fetch(`${url}/stories`, {
+            "method": "GET",
+            "headers": {
+                "Accept": "application/json",
+                "Authorization": `Token ${localStorage.getItem("writeBrain_token")}`
+            }
+        })
+            .then(response => response.json())    
+    },
+    getSprintsByStory(storyId) {
+        return fetch(`${url}/sprints?story=${storyId}`, {
+            "method": "GET",
+            "headers": {
+                "Accept": "application/json",
+                "Authorization": `Token ${localStorage.getItem("writeBrain_token")}`
+            }
+        })
+            .then(response => response.json())    
     }
 }
