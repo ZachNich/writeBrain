@@ -8,7 +8,7 @@ const StoryCard = props => {
     const [sprints, setSprints] = useState([])
 
     const getSprints = () => {
-        ApiManager.getSprints()
+        ApiManager.getSprintsByStory(props.story.id)
             .then(setSprints)
     }
 

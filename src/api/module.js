@@ -42,8 +42,8 @@ export default {
         })
             .then(response => response.json())    
     },
-    getSprints() {
-        return fetch(`${url}/sprints`, {
+    getSprintsByStory(storyId) {
+        return fetch(`${url}/sprints?story=${storyId}`, {
             "method": "GET",
             "headers": {
                 "Accept": "application/json",

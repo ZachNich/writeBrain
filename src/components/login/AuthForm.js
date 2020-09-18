@@ -7,12 +7,14 @@ import ApiManager from '../../api/module'
 const AuthForm = props => {
     const [user, setUser] = useState({})
 
+    const setIsAuthenticated = props.setIsAuthenticated
+
     const handleLogin = props => {
         ApiManager.login(user)
-            .then(response => {
-                if ("valid" in response && response.valid && "token" in response) {
+        .then(response => {
+            if ("valid" in response && response.valid && "token" in response) {
+                    setIsAuthenticated(true)
                     localStorage.setItem("writeBrain_token", response.token)
-                    props.setIsAuthenticated(true)
                 }
             })
         }
@@ -21,8 +23,8 @@ const AuthForm = props => {
             ApiManager.register(user)
             .then(response => {
                 if ("token" in response) {
+                    setIsAuthenticated(true)
                     localStorage.setItem("writeBrain_token", response.token)
-                    props.setIsAuthenticated(true)
                 }
             })
     }

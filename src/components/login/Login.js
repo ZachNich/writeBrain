@@ -36,15 +36,15 @@ const Login = props => {
                     <Modal.Title>Log In</Modal.Title>}
                 </Modal.Header>
                 <Modal.Body>
-                    <AuthForm showRegister={showRegister} />
+                    <AuthForm showRegister={showRegister} setIsAuthenticated={props.setIsAuthenticated} />
                 </Modal.Body>
             </Modal>
             {props.isAuthenticated ? 
             <Button variant="warning" size="sm" onClick={handleLogout}>Log Out</Button>
             :
             <>
-                <Button variant="primary" size="sm" setIsAuthenticated={props.setIsAuthenticated} onClick={handleShow}>Log In</Button>
-                <Button variant="info" size="sm" setIsAuthenticated={props.setIsAuthenticated} onClick={setRegister}>Register</Button>
+                <Button variant="primary" size="sm" onClick={handleShow}>Log In</Button>
+                <Button variant="info" size="sm" onClick={setRegister}>Register</Button>
             </>}
         </>
     )
