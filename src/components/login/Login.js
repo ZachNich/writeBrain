@@ -21,6 +21,10 @@ const Login = props => {
         setShowRegister(true)
     }
 
+    const handleLogout = () => {
+        localStorage.removeItem("writeBrain_token")
+    }
+
     return (
         <>
             <Modal show={show} onHide={handleClose}>
@@ -36,6 +40,7 @@ const Login = props => {
             </Modal>
             <Button variant="primary" size="sm" onClick={handleShow}>Log In</Button>
             <Button variant="info" size="sm" onClick={setRegister}>Register</Button>
+            <Button variant="warning" size="sm" onClick={handleLogout}>Log Out</Button>
         </>
     )
 }

@@ -55,7 +55,10 @@ const AuthForm = props => {
             </Form.Row>
             <Form.Row>
                 <Col>
-                    <Button>Submit</Button>
+                    {props.showRegister ? 
+                        <Button onClick={handleRegister}>Submit</Button>
+                    :
+                        <Button onClick={handleLogin}>Submit</Button>}
                     <Button>Clear</Button>
                 </Col>
             </Form.Row>
