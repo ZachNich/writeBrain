@@ -1,58 +1,42 @@
 import React, { useState } from 'react'
-import Form from 'react-bootstrap/Form'
-import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
-import ApiManager from '../../api/module'
+import Modal from 'react-bootstrap/Modal'
+import AuthForm from './AuthForm'
 
 const Login = props => {
-    const [user, setUser] = useState({})
-    
-    const handleFieldChange = e => {
-        const stateToChange = {...user}
-        stateToChange[e.target.id.split("-")[1]] = e.target.value
-        setUser(stateToChange)
+    const [show, setShow] = useState(false)
+    const [showRegister, setShowRegister] = useState(false)
+
+    const handleClose = () => {
+        setShow(false)
+        setShowRegister(false)
     }
 
-    const handleLogin = props => {
-        ApiManager.login(user)
-            .then(response => {
-                if ("valid" in response && response.valid && "token" in response) {
-                    localStorage.setItem("writeBrain_token", response.token)
-                }
-            })
+    const handleShow = () => {
+        setShow(true)
     }
 
-    const handleRegister = props => {
-        ApiManager.register(user)
-            .then(response => {
-                if ("token" in response) {
-                    localStorage.setItem("writeBrain_token", response.token)
-                }
-            })
+    const setRegister = () => {
+        handleShow()
+        setShowRegister(true)
     }
 
     return (
-        <Form>
-            <Form.Row>
-                <Col>
-                    <Form.Control id="login-email" placeholder="email" onChange={handleFieldChange} />
-                </Col>
-                <Col>
-                    <Form.Control id="login-username" placeholder="username" onChange={handleFieldChange} />
-                </Col>
-                <Col>
-                    <Form.Control id="login-password" placeholder="password" onChange={handleFieldChange} />
-                </Col>
-            </Form.Row>
-            <Form.Row>
-                <Col>
-                    <Button variant="primary" size="sm" onClick={handleLogin}>Log In</Button>
-                </Col>
-                <Col>
-                    <Button variant="info" size="sm" onClick={handleRegister}>Register</Button>
-                </Col>
-            </Form.Row>
-        </Form>
+        <>
+            <Modal show={show} onHide={handleClose}>
+                <Modal.Header closeButton>
+                    {showRegister ? 
+                    <Modal.Title>Register</Modal.Title>
+                    : 
+                    <Modal.Title>Log In</Modal.Title>}
+                </Modal.Header>
+                <Modal.Body>
+                    <AuthForm showRegister={showRegister} />
+                </Modal.Body>
+            </Modal>
+            <Button variant="primary" size="sm" onClick={handleShow}>Log In</Button>
+            <Button variant="info" size="sm" onClick={setRegister}>Register</Button>
+        </>
     )
 }
 
