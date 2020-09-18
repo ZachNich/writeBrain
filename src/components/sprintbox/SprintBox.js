@@ -18,9 +18,9 @@ const SprintBox = props => {
         const sprint = {
             body: input,
             started_at: new Date(),
-            story: 1,
-            mood_before: 1,
-            mood_after: 2
+            story_id: 1,
+            mood_before_id: 1,
+            mood_after_id: 2
         }
         console.log(sprint)
         ApiManager.postSprint(sprint)
