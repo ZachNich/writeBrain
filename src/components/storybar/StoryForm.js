@@ -6,18 +6,29 @@ import Col from 'react-bootstrap/Col'
 import ApiManager from '../../api/module'
 
 const StoryForm = props => {
-    const [story, setStory] = useState({})
+    const [story, setStory] = useState({
+        "title": "",
+        "description": ""
+    })
+
+    const handleClose = () => {
+        setStory({
+            "title": "",
+            "description": ""
+        })
+        props.setShow(false)
+    }
 
     const postStory = () => {
         ApiManager.postStory(story)
             .then(props.getStories)
-            .then(props.handleClose)
+            .then(handleClose)
     }
     
     const updateStory = () => {
         ApiManager.updateStory(story)
             .then(() => props.getStories()) 
-            .then(props.handleClose)
+            .then(handleClose)
     }
 
     const handleFieldChange = e => {
@@ -33,7 +44,7 @@ const StoryForm = props => {
     }, [])
 
     return (
-        <Modal show={props.show} onHide={props.handleClose}>
+        <Modal show={props.show} onHide={handleClose}>
             <Modal.Header closeButton>
                 {props.edit ? 
                 <Modal.Title>Edit Story</Modal.Title>
