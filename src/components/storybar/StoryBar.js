@@ -11,7 +11,6 @@ const StoryBar = props => {
     const [show, setShow] = useState(false)
 
     const handleShow = () => setShow(true)
-    const handleClose = () => setShow(false)
 
     const getStories = () => {
         ApiManager.getStories()
@@ -20,7 +19,7 @@ const StoryBar = props => {
 
     return (
         <>
-            <StoryForm show={show} handleClose={handleClose} getStories={getStories} />
+            <StoryForm show={show} setShow={setShow} getStories={getStories} />
             <Accordion>
                 <Card>
                     <Accordion.Toggle as={Card.Header} eventKey="0" onClick={getStories}>
