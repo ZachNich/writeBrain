@@ -3,9 +3,18 @@ import ApiManager from '../../api/module'
 import Card from 'react-bootstrap/Card'
 import Accordion from 'react-bootstrap/Accordion'
 import SprintCard from './SprintCard'
+import Button from 'react-bootstrap/Button'
+import StoryForm from './StoryForm'
+import DelStoryWarning from './DelStoryWarning'
 
 const StoryCard = props => {
     const [sprints, setSprints] = useState([])
+    const [show, setShow] = useState(false)
+    const [showWarning, setShowWarning] = useState(false)
+
+    const handleShow = () => setShow(true)
+    const handleClose = () => setShow(false)
+    const handleShowWarning = () => setShowWarning(true)
 
     const getSprints = () => {
         ApiManager.getSprintsByStory(props.story.id)
@@ -13,18 +22,26 @@ const StoryCard = props => {
     }
 
     return (
-        <Accordion.Collapse eventKey="0">
-            <Card.Body>
-                <Accordion>
-                    <Card>
-                        <Accordion.Toggle as={Card.Header} eventKey="1" onClick={getSprints}>
-                            {props.story.title}
-                        </Accordion.Toggle>
-                        {sprints.map(sprint => <SprintCard sprint={sprint} />)}
-                    </Card>
-                </Accordion>
-            </Card.Body>
-        </Accordion.Collapse>
+        <>
+            <StoryForm show={show} handleClose={handleClose} edit={true} />
+            <Accordion.Collapse eventKey="0">
+                <Card.Body>
+                    <Accordion>
+                        <Card>
+                            <Accordion.Toggle as={Card.Header} eventKey="1" onClick={getSprints}>
+                                {props.story.title} - {props.story.description}
+                            </Accordion.Toggle>
+                            {sprints.map(sprint => <SprintCard sprint={sprint} />)}
+                        </Card>
+                    </Accordion>
+                    <>
+                        <Button variant="warning" size="sm" onClick={handleShow}>Edit</Button>
+                        <Button variant="danger" size="sm" onClick={handleShowWarning}>Delete</Button>
+                        <DelStoryWarning story={props.story} getStories={props.getStories} showWarning={showWarning} setShowWarning={setShowWarning} getSprints={getSprints} handleShow={handleShow} />
+                    </>
+                </Card.Body>
+            </Accordion.Collapse>
+        </>
     )
 }
 
