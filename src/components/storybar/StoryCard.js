@@ -18,8 +18,7 @@ const StoryCard = props => {
                 <Accordion>
                     <Card>
                         <Accordion.Toggle as={Card.Header} eventKey="1" onClick={getSprints}>
-                            {props.story.title}
-                            {props.story.description}
+                            {props.story.title} - {props.story.description}
                         </Accordion.Toggle>
                         {sprints.map(sprint => <SprintCard sprint={sprint} />)}
                     </Card>

@@ -12,6 +12,17 @@ export default {
             body: JSON.stringify(sprint)
         }).then(response => response.json())
     },
+    postStory(story) {
+        return fetch(`${url}/stories`, {
+            method: 'POST',
+            headers: {
+                "Content-type": "application/json",
+                "Accept": "application/json",
+                "Authorization": `Token ${localStorage.getItem('writeBrain_token')}`
+            },
+            body: JSON.stringify(story)
+        }).then(response => response.json())
+    },
     login(user) {
         return fetch(`${url}/login`, {
             method: 'POST',
