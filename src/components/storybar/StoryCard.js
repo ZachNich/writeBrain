@@ -23,7 +23,7 @@ const StoryCard = props => {
 
     return (
         <>
-            <StoryForm show={show} handleClose={handleClose} edit={true} />
+            <StoryForm show={show} handleClose={handleClose} edit={true} story={props.story} getStories={props.getStories} />
             <Accordion.Collapse eventKey="0">
                 <Card.Body>
                     <Accordion>
