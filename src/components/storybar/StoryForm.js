@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal'
@@ -23,6 +23,12 @@ const StoryForm = props => {
         stateToChange[e.target.id.split("-")[1]] = e.target.value
         setStory(stateToChange)
     }
+
+    useEffect(() => {
+        if (props.story) { 
+            setStory(props.story)
+        }
+    }, [])
 
     return (
         <Modal show={props.show} onHide={props.handleClose}>
