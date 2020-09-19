@@ -11,11 +11,13 @@ const StoryForm = props => {
     const postStory = () => {
         ApiManager.postStory(story)
             .then(props.getStories)
+            .then(props.handleClose)
     }
     
     const updateStory = () => {
         ApiManager.updateStory(story)
-            .then(props.getStories)
+            .then(() => props.getStories()) 
+            .then(props.handleClose)
     }
 
     const handleFieldChange = e => {
