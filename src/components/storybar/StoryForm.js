@@ -58,7 +58,6 @@ const StoryForm = props => {
                             :
                             <Button onClick={postStory}>Submit</Button>
                             }
-                            <Button>Clear</Button>
                         </Col>
                     </Form.Row>
                 </Form>
