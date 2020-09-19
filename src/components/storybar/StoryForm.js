@@ -25,7 +25,7 @@ const StoryForm = props => {
     }
 
     useEffect(() => {
-        if (props.story) { 
+        if (props.story) {
             setStory(props.story)
         }
     }, [])
