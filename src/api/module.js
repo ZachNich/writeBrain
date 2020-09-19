@@ -50,8 +50,7 @@ export default {
                 "Accept": "application/json",
                 "Authorization": `Token ${localStorage.getItem("writeBrain_token")}`
             }
-        })
-            .then(response => response.json())    
+        }).then(response => response.json())    
     },
     getSprintsByStory(storyId) {
         return fetch(`${url}/sprints?story=${storyId}`, {
@@ -62,5 +61,22 @@ export default {
             }
         })
             .then(response => response.json())    
+    },
+    deleteStory(story) {
+        return fetch(`${url}/stories/${story.id}`, {
+            "method": "DELETE",
+            "headers": {
+                "Authorization": `Token ${localStorage.getItem("writeBrain_token")}`
+            }
+        })
+    },
+    updateStory(story) {
+        return fetch(`${url}/stories/${story.id}`, {
+            "method": "PUT", 
+            "headers": {
+                "Accept": "application/json",
+                "Authorization": `Token ${localStorage.getItem("writeBrain_token")}`
+            }
+        }).then(response => response.json())
     }
 }
