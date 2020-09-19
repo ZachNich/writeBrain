@@ -19,7 +19,7 @@ const DelStoryWarning = props => {
                     Deleting a story is irreversible and will delete all related sprints
                 </Alert.Heading>
                 <p>
-                    If you'd like to keep your sprints, please reassign them to another story before deleting the current story. If you'd like to delete this story and all of its related sprints, click continue. This action is irreversible.
+                    If you'd like to keep your sprints, please reassign them to another story before deleting the current story. If you'd like to delete this story and all of its related sprints, click Delete Story. This action is irreversible.
                 </p>
                 <Button variant="danger" onClick={handleDelete}>Delete Story</Button>
             </Alert>
