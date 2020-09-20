@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Alert from 'react-bootstrap/Alert'
 import Button from 'react-bootstrap/Button'
 import SplitButton from 'react-bootstrap/SplitButton'
@@ -26,7 +26,12 @@ const DelStoryWarning = props => {
                 .then(null)
         })
         props.getStories()
+        handleCloseWarning()
     }
+
+    useEffect(() => {
+        props.getSprints()
+    }, [props.showWarning])
 
     if (props.setShowWarning) {
         return (

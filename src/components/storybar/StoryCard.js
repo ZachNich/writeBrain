@@ -36,7 +36,7 @@ const StoryCard = props => {
                     <>
                         <Button variant="warning" size="sm" onClick={handleShow}>Edit</Button>
                         <Button variant="danger" size="sm" onClick={handleShowWarning}>Delete</Button>
-                        <DelStoryWarning story={props.story} getStories={props.getStories} showWarning={showWarning} setShowWarning={setShowWarning} getSprints={getSprints} handleShow={handleShow} sprints={sprints} stories={props.stories} />
+                        <DelStoryWarning story={props.story} getStories={props.getStories} showWarning={showWarning} setShowWarning={setShowWarning} getSprints={getSprints} handleShow={handleShow} sprints={sprints} stories={props.stories} getSprints={getSprints} />
                     </>
                 </Card.Body>
             </Accordion.Collapse>
