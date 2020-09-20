@@ -30,7 +30,7 @@ const StoryBar = props => {
                             <Button variant="info" size="sm" onClick={handleShow}>Create Story</Button>
                         </Card.Body>
                     </Accordion.Collapse>
-                    {stories.map(story => <StoryCard getStories={getStories} story={story} />)}
+                    {stories.map(story => <StoryCard getStories={getStories} stories={stories} story={story} />)}
                 </Card>
             </Accordion>
         </>
