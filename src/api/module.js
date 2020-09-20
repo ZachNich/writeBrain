@@ -63,6 +63,15 @@ export default {
             }
         }).then(response => response.json())    
     },
+    getMoods() {
+        return fetch(`${url}/moods`, {
+            "method": "GET",
+            "headers": {
+                "Accept": "application/json",
+                "Authorization": `Token ${localStorage.getItem("writeBrain_token")}`
+            }
+        }).then(response => response.json())    
+    },
     getSprintsByStory(storyId) {
         return fetch(`${url}/sprints?story=${storyId}`, {
             "method": "GET",

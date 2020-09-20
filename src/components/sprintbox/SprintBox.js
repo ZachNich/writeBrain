@@ -5,13 +5,17 @@ import DropdownButton from 'react-bootstrap/DropdownButton'
 import Alert from 'react-bootstrap/Alert'
 import ApiManager from '../../api/module' 
 import StoryForm from '../storybar/StoryForm'
+import MoodSelect from './MoodSelect'
 
 const SprintBox = props => {
     const [input, setInput] = useState('')
     const [stories, setStories] = useState([])
     const [selectedStory, setSelectedStory] = useState({title: "Select Story"})
     const [showAlert, setShowAlert] = useState(false)
+    const [showMoodAlert, setShowMoodAlert] = useState(false)
     const [showForm, setShowForm] = useState(false)
+    const [moodBefore, setMoodBefore] = useState({name: "Mood Before Sprint"})
+    const [moodAfter, setMoodAfter] = useState ({name: "Mood After Sprint"})
 
     const handleFieldChange = e => {
         const stateToChange = e.target.value
@@ -29,18 +33,27 @@ const SprintBox = props => {
 
     const saveSprint = e => {
         if (selectedStory.id) {
-            const sprint = {
-                body: input,
-                started_at: new Date(),
-                story_id: selectedStory.id,
-                mood_before_id: 1,
-                mood_after_id: 2
+            if (moodBefore.id && moodAfter.id) {
+                const sprint = {
+                    body: input,
+                    started_at: new Date(),
+                    story_id: selectedStory.id,
+                    mood_before_id: moodBefore.id,
+                    mood_after_id: moodAfter.id
+                }
+                ApiManager.postSprint(sprint)
+                    .then(() => {
+                        setSelectedStory({title: "Select Story"})
+                        setMoodBefore({name: "Mood Before Sprint"})
+                        setMoodAfter({name: "Mood After Sprint"})
+                        setInput('')
+                    })
+            } else {
+                setShowMoodAlert(true)
+                setTimeout(() => {
+                    setShowMoodAlert(false)
+                }, 3000)
             }
-            ApiManager.postSprint(sprint)
-                .then(() => {
-                    setSelectedStory({title: "Select Story"})
-                    setInput('')
-                })
         } else {
             setShowAlert(true)
             setTimeout(() => {
@@ -58,6 +71,7 @@ const SprintBox = props => {
     return (
         <>
             <StoryForm show={showForm} setShow={setShowForm} />
+            <MoodSelect id="mood_before" setMood={setMoodBefore} mood={moodBefore} />
             <div className="input_container">
                 <input 
                     className="sprint_input" 
@@ -69,6 +83,7 @@ const SprintBox = props => {
                 />
                 <Button variant="outline-success" size="sm" onClick={saveSprint}>Submit</Button>
                 <Button variant="outline-danger" size="sm" onClick={clearSprint}>Clear</Button>
+                <MoodSelect id="mood_after" setMood={setMoodAfter} mood={moodAfter} />
                 <DropdownButton variant="light" title={selectedStory.title} size="sm" onClick={getStories}>
                     <Dropdown.Item eventKey="0" onClick={() => setShowForm(true)}>
                         Create Story
@@ -84,6 +99,9 @@ const SprintBox = props => {
                 </DropdownButton>
                 <Alert variant="danger" show={showAlert} dismissible onClose={() => setShowAlert(false)}>
                     Please choose a Story to house your Sprint before submission.
+                </Alert>
+                <Alert variant="danger" show={showMoodAlert} dismissible onClose={() => setShowMoodAlert(false)}>
+                    Please select your mood before and after writing your sprint before submission.
                 </Alert>
             </div>
         </>
