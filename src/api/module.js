@@ -12,6 +12,17 @@ export default {
             "body": JSON.stringify(story)
         })
     },
+    updateSprint(sprint) {
+        return fetch(`${url}/sprints/${sprint.id}`, {
+            "method": 'PUT',
+            "headers": {
+                "Content-type": "application/json",
+                "Accept": "application/json",
+                "Authorization": `Token ${localStorage.getItem('writeBrain_token')}`
+            },
+            "body": JSON.stringify(sprint)
+        })
+    },
     postSprint(sprint) {
         return fetch(`${url}/sprints`, {
             "method": 'POST',

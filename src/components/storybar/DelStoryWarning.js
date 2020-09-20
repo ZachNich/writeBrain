@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Alert from 'react-bootstrap/Alert'
 import Button from 'react-bootstrap/Button'
 import SplitButton from 'react-bootstrap/SplitButton'
@@ -6,6 +6,8 @@ import Dropdown from 'react-bootstrap/Dropdown'
 import ApiManager from '../../api/module'
 
 const DelStoryWarning = props => {
+    const [selectedStory, setSelectedStory] = useState({title: "", description: ""})
+
     const handleCloseWarning = () => props.setShowWarning(false)
 
     const handleDelete = () => {
@@ -13,8 +15,17 @@ const DelStoryWarning = props => {
             .then(props.getStories)
     }
 
-    const moveSprints = () => {
+    const handleStorySelect = story => {
+        setSelectedStory(story)
+    }
 
+    const moveSprints = story => {
+        props.sprints.forEach(sprint => {
+            sprint["story_id"] = story.id
+            ApiManager.updateSprint(sprint)
+                .then(null)
+        })
+        props.getStories()
     }
 
     if (props.setShowWarning) {
@@ -26,9 +37,11 @@ const DelStoryWarning = props => {
                 <p>
                     If you'd like to keep your sprints, please reassign them to another story before deleting the current story. If you'd like to delete this story and all of its related sprints, click Delete Story. This action is irreversible.
                 </p>
-                <SplitButton variant="primary" onClick={null} size="sm" title="MoveSprints">
+                <SplitButton variant="primary" onClick={() => moveSprints(selectedStory)} size="sm" title="Move Sprints">
                     {props.stories.map(story => 
-                        <Dropdown.Item eventKey={story.id}>{story.title}</Dropdown.Item>
+                        <Dropdown.Item eventKey={story.id} onClick={() => handleStorySelect(story)}>
+                            {story.title} 
+                        </Dropdown.Item>
                     )}
                 </SplitButton>
                 <Button variant="danger" onClick={handleDelete} size="sm">Delete Story</Button>
