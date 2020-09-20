@@ -13,8 +13,8 @@ const SprintBox = props => {
     const [selectedStory, setSelectedStory] = useState({title: "Select Story"})
     const [showAlert, setShowAlert] = useState(false)
     const [showForm, setShowForm] = useState(false)
-    const [moodBefore, setMoodBefore] = useState({"name": "Mood Before Sprint"})
-    const [moodAfter, setMoodAfter] = useState ({"name": "Mood After Sprint"})
+    const [moodBefore, setMoodBefore] = useState({name: "Mood Before Sprint"})
+    const [moodAfter, setMoodAfter] = useState ({name: "Mood After Sprint"})
 
     const handleFieldChange = e => {
         const stateToChange = e.target.value
@@ -42,6 +42,8 @@ const SprintBox = props => {
             ApiManager.postSprint(sprint)
                 .then(() => {
                     setSelectedStory({title: "Select Story"})
+                    setMoodBefore({name: "Mood Before Sprint"})
+                    setMoodAfter({name: "Mood After Sprint"})
                     setInput('')
                 })
         } else {
