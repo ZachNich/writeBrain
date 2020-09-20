@@ -5,6 +5,7 @@ import DropdownButton from 'react-bootstrap/DropdownButton'
 import Alert from 'react-bootstrap/Alert'
 import ApiManager from '../../api/module' 
 import StoryForm from '../storybar/StoryForm'
+import MoodSelect from './MoodSelect'
 
 const SprintBox = props => {
     const [input, setInput] = useState('')
@@ -12,6 +13,8 @@ const SprintBox = props => {
     const [selectedStory, setSelectedStory] = useState({title: "Select Story"})
     const [showAlert, setShowAlert] = useState(false)
     const [showForm, setShowForm] = useState(false)
+    const [moodBefore, setMoodBefore] = useState({"name": "Mood Before Sprint"})
+    const [moodAfter, setMoodAfter] = useState ({"name": "Mood After Sprint"})
 
     const handleFieldChange = e => {
         const stateToChange = e.target.value
@@ -33,8 +36,8 @@ const SprintBox = props => {
                 body: input,
                 started_at: new Date(),
                 story_id: selectedStory.id,
-                mood_before_id: 1,
-                mood_after_id: 2
+                mood_before_id: moodBefore.id,
+                mood_after_id: moodAfter.id
             }
             ApiManager.postSprint(sprint)
                 .then(() => {
@@ -58,6 +61,7 @@ const SprintBox = props => {
     return (
         <>
             <StoryForm show={showForm} setShow={setShowForm} />
+            <MoodSelect id="mood_before" setMood={setMoodBefore} mood={moodBefore} />
             <div className="input_container">
                 <input 
                     className="sprint_input" 
@@ -69,6 +73,7 @@ const SprintBox = props => {
                 />
                 <Button variant="outline-success" size="sm" onClick={saveSprint}>Submit</Button>
                 <Button variant="outline-danger" size="sm" onClick={clearSprint}>Clear</Button>
+                <MoodSelect id="mood_after" setMood={setMoodAfter} mood={moodAfter} />
                 <DropdownButton variant="light" title={selectedStory.title} size="sm" onClick={getStories}>
                     <Dropdown.Item eventKey="0" onClick={() => setShowForm(true)}>
                         Create Story
