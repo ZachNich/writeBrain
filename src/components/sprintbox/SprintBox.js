@@ -12,6 +12,7 @@ const SprintBox = props => {
     const [stories, setStories] = useState([])
     const [selectedStory, setSelectedStory] = useState({title: "Select Story"})
     const [showAlert, setShowAlert] = useState(false)
+    const [showMoodAlert, setShowMoodAlert] = useState(false)
     const [showForm, setShowForm] = useState(false)
     const [moodBefore, setMoodBefore] = useState({name: "Mood Before Sprint"})
     const [moodAfter, setMoodAfter] = useState ({name: "Mood After Sprint"})
@@ -32,20 +33,27 @@ const SprintBox = props => {
 
     const saveSprint = e => {
         if (selectedStory.id) {
-            const sprint = {
-                body: input,
-                started_at: new Date(),
-                story_id: selectedStory.id,
-                mood_before_id: moodBefore.id,
-                mood_after_id: moodAfter.id
+            if (moodBefore.id && moodAfter.id) {
+                const sprint = {
+                    body: input,
+                    started_at: new Date(),
+                    story_id: selectedStory.id,
+                    mood_before_id: moodBefore.id,
+                    mood_after_id: moodAfter.id
+                }
+                ApiManager.postSprint(sprint)
+                    .then(() => {
+                        setSelectedStory({title: "Select Story"})
+                        setMoodBefore({name: "Mood Before Sprint"})
+                        setMoodAfter({name: "Mood After Sprint"})
+                        setInput('')
+                    })
+            } else {
+                setShowMoodAlert(true)
+                setTimeout(() => {
+                    setShowMoodAlert(false)
+                }, 3000)
             }
-            ApiManager.postSprint(sprint)
-                .then(() => {
-                    setSelectedStory({title: "Select Story"})
-                    setMoodBefore({name: "Mood Before Sprint"})
-                    setMoodAfter({name: "Mood After Sprint"})
-                    setInput('')
-                })
         } else {
             setShowAlert(true)
             setTimeout(() => {
@@ -91,6 +99,9 @@ const SprintBox = props => {
                 </DropdownButton>
                 <Alert variant="danger" show={showAlert} dismissible onClose={() => setShowAlert(false)}>
                     Please choose a Story to house your Sprint before submission.
+                </Alert>
+                <Alert variant="danger" show={showMoodAlert} dismissible onClose={() => setShowMoodAlert(false)}>
+                    Please select your mood before and after writing your sprint before submission.
                 </Alert>
             </div>
         </>
