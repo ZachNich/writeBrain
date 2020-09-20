@@ -62,8 +62,6 @@ const SprintBox = props => {
         }
     }
 
-    const handleClose = () => setShowForm(false)
-
     useEffect(() => {
         getStories()
     }, [])

@@ -13,7 +13,6 @@ const StoryCard = props => {
     const [showWarning, setShowWarning] = useState(false)
 
     const handleShow = () => setShow(true)
-    const handleClose = () => setShow(false)
     const handleShowWarning = () => setShowWarning(true)
 
     const getSprints = () => {
@@ -37,7 +36,7 @@ const StoryCard = props => {
                     <>
                         <Button variant="warning" size="sm" onClick={handleShow}>Edit</Button>
                         <Button variant="danger" size="sm" onClick={handleShowWarning}>Delete</Button>
-                        <DelStoryWarning story={props.story} getStories={props.getStories} showWarning={showWarning} setShowWarning={setShowWarning} getSprints={getSprints} handleShow={handleShow} />
+                        <DelStoryWarning story={props.story} getStories={props.getStories} showWarning={showWarning} setShowWarning={setShowWarning} getSprints={getSprints} handleShow={handleShow} sprints={sprints} stories={props.stories} />
                     </>
                 </Card.Body>
             </Accordion.Collapse>
