@@ -4,6 +4,12 @@ import Accordion from 'react-bootstrap/Accordion'
 import Button from 'react-bootstrap/Button'
 
 const SprintCard = props => {
+
+    const openSprint = () => {
+        props.setSprint(props.sprint)
+        props.history.push(`/sprints/${props.sprint.id}`)
+    }
+
     return (
         <Accordion.Collapse eventKey="1">
         <Card.Body>
@@ -11,7 +17,7 @@ const SprintCard = props => {
                 <Card>
                     {props.sprint.body}
                 </Card>
-                <Button variant="info" size="sm" >View Sprint</Button>
+                <Button variant="info" size="sm" onClick={openSprint} >View Sprint</Button>
             </Accordion>
         </Card.Body>
     </Accordion.Collapse>
