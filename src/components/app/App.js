@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Route, withRouter } from 'react-router-dom'
+import { Route, Redirect } from 'react-router-dom'
 import './App.css'
 import SprintBox from '../sprintbox/SprintBox'
 import Login from '../login/Login'
@@ -28,7 +28,18 @@ const App = () => {
             <SprintBox sprint={sprint} />
           </>
         }/>
-      <Route path="/sprints/:sprintId" render={props => <SprintView />} />
+      {sprint.id ? 
+        <Route path="/sprints/:sprintId" render={props => 
+            <>
+              <StoryBar setSprint={setSprint} {...props} />
+              <SprintView sprint={sprint} />
+            </>
+          }/>
+      :
+        <Route path="/sprints/:sprintId">
+          <Redirect to="/" />
+        </Route>
+      }
     </>
   );
 }
