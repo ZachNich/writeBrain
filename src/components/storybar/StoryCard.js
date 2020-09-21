@@ -26,7 +26,7 @@ const StoryCard = props => {
             <Accordion.Collapse eventKey="0">
                 <Card.Body>
                     <Accordion>
-                        <Card>
+                        <Card> 
                             <Accordion.Toggle as={Card.Header} eventKey="1" onClick={getSprints}>
                                 {props.story.title} - {props.story.description}
                             </Accordion.Toggle>
