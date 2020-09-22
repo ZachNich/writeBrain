@@ -109,5 +109,13 @@ export default {
                 "Authorization": `Token ${localStorage.getItem("writeBrain_token")}`
             }
         })
+    },
+    deleteSprint(sprint) {
+        return fetch(`${url}/sprints/${sprint.id}`, {
+            "method": "DELETE",
+            "headers": {
+                "Authorization": `Token ${localStorage.getItem("writeBrain_token")}`
+            }
+        })
     }
 }
