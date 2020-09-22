@@ -32,7 +32,7 @@ const App = () => {
         <Route path="/sprints/:sprintId" render={props => 
             <>
               <StoryBar setSprint={setSprint} {...props} />
-              <SprintView sprint={sprint} />
+              <SprintView sprint={sprint} {...props} />
             </>
           }/>
       :
