@@ -15,6 +15,7 @@ const Timer = props => {
             if (props.timeLeft.hours === 0 && props.timeLeft.minutes === 0 && props.timeLeft.seconds === 0) {
                 setOver(true)
                 startSound()
+                props.setShowTimer(false)
             } else if (props.timeLeft.seconds === 0 && props.timeLeft.minutes === 0) {
                 props.setTimeLeft({
                     hours: props.timeLeft.hours - 1,
