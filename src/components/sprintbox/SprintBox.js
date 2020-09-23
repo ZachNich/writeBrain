@@ -6,6 +6,7 @@ import Alert from 'react-bootstrap/Alert'
 import ApiManager from '../../api/module' 
 import StoryForm from '../storybar/StoryForm'
 import MoodSelect from './MoodSelect'
+import Timer from './Timer'
 
 const SprintBox = props => {
     const [input, setInput] = useState('')
@@ -69,6 +70,7 @@ const SprintBox = props => {
     return (
         <>
             <StoryForm show={showForm} setShow={setShowForm} />
+            <Timer />
             <MoodSelect id="mood_before" setMood={setMoodBefore} mood={moodBefore} />
             <div className="input_container">
                 <input 
