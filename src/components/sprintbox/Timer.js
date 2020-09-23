@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import useInterval from '../../hooks/useInterval'
 
-const Timer = (props, {hours = 0, minutes = 0, seconds = 0}) => {
+const Timer = props => {
     const [over, setOver] = useState(false)
     const [timeString, setTimeString] = useState("")
 

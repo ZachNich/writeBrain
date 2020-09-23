@@ -16,9 +16,13 @@ const TimerForm = props => {
     }
 
     const startSprint = () => {
-        props.setShow(false)
-        props.setShowTimer(true)
-        props.setStartTime(new Date())
+        if (props.timeLeft.seconds < 0 || props.timeLeft.minutes < 0 || props.timeLeft.hours < 0 || props.timeLeft.seconds > 60 || props.timeLeft.minutes > 60 || props.timeLeft.seconds % 1 !== 0 || props.timeLeft.minutes % 1 !== 0 || props.timeLeft.hours % 1 !== 0) {
+            window.alert("Please use 0 - 60 for all timer fields.")
+        } else {
+            props.setShow(false)
+            props.setShowTimer(true)
+            props.setStartTime(new Date())
+        }
     }
 
     return (
@@ -30,13 +34,13 @@ const TimerForm = props => {
                 <Form>
                     <Form.Row>
                         <Col>
-                            <Form.Control id="timer-hours" placeholder="hours" onChange={handleFieldChange} type="number" />
+                            <input type="number" id="timer-hours" placeholder="hours" onChange={handleFieldChange} min="0" />
                         </Col>
                         <Col>
-                            <Form.Control id="timer-minutes" placeholder="minutes" onChange={handleFieldChange} type="number" />
+                            <input type="number" id="timer-minutes" placeholder="minutes" onChange={handleFieldChange} min={0} max={59} />
                         </Col>
                         <Col>
-                            <Form.Control id="timer-seconds" placeholder="seconds" onChange={handleFieldChange} type="number" />
+                            <input type="number" id="timer-seconds" placeholder="seconds" onChange={handleFieldChange} min="0" max="59" />
                         </Col>
                     </Form.Row>
                     <Form.Row>
