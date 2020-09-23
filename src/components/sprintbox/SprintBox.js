@@ -82,7 +82,7 @@ const SprintBox = props => {
             <StoryForm show={showForm} setShow={setShowForm} />
             <TimerForm show={showTimerForm} setShow={setShowTimerForm} setShowTimer={setShowTimer} timeLeft={timeLeft} setTimeLeft={setTimeLeft} setStartTime={setStartTime} />
             {showTimer ? 
-                <Timer timeLeft={timeLeft} setTimeLeft={setTimeLeft} hours={timeLeft.hours} minutes={timeLeft.minutes} seconds={timeLeft.seconds} />
+                <Timer timeLeft={timeLeft} setTimeLeft={setTimeLeft} hours={timeLeft.hours} minutes={timeLeft.minutes} seconds={timeLeft.seconds} setShowTimer={setShowTimer} />
             :
                 <Button variant="info" size="sm" onClick={() => setShowTimerForm(true)}>Set Timer</Button>
             }
