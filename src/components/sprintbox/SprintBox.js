@@ -57,6 +57,7 @@ const SprintBox = props => {
                         setMoodBefore({name: "Mood Before Sprint"})
                         setMoodAfter({name: "Mood After Sprint"})
                         setInput('')
+                        setShowTimer(false)
                     })
             } else {
                 setShowMoodAlert(true)
