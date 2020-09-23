@@ -7,6 +7,7 @@ import ApiManager from '../../api/module'
 import StoryForm from '../storybar/StoryForm'
 import MoodSelect from './MoodSelect'
 import Timer from './Timer'
+import TimerForm from './TimerForm'
 
 const SprintBox = props => {
     const [input, setInput] = useState('')
@@ -17,6 +18,14 @@ const SprintBox = props => {
     const [showForm, setShowForm] = useState(false)
     const [moodBefore, setMoodBefore] = useState({name: "Mood Before Sprint"})
     const [moodAfter, setMoodAfter] = useState ({name: "Mood After Sprint"})
+    const [showTimer, setShowTimer] = useState(false)
+    const [showTimerForm, setShowTimerForm] = useState(false)
+    const [timeLeft, setTimeLeft] = useState({
+        hours: 0,
+        minutes: 0,
+        seconds: 0
+    })
+    const [startTime, setStartTime] = useState()
 
     const handleFieldChange = e => {
         const stateToChange = e.target.value
@@ -37,7 +46,7 @@ const SprintBox = props => {
             if (moodBefore.id && moodAfter.id) {
                 const sprint = {
                     body: input,
-                    started_at: new Date(),
+                    started_at: startTime,
                     story_id: selectedStory.id,
                     mood_before_id: moodBefore.id,
                     mood_after_id: moodAfter.id
@@ -53,13 +62,13 @@ const SprintBox = props => {
                 setShowMoodAlert(true)
                 setTimeout(() => {
                     setShowMoodAlert(false)
-                }, 3000)
+                }, 5000)
             }
         } else {
             setShowAlert(true)
             setTimeout(() => {
                 setShowAlert(false)
-            }, 3000)
+            }, 5000)
         }
     }
 
@@ -70,7 +79,12 @@ const SprintBox = props => {
     return (
         <>
             <StoryForm show={showForm} setShow={setShowForm} />
-            <Timer />
+            <TimerForm show={showTimerForm} setShow={setShowTimerForm} setShowTimer={setShowTimer} timeLeft={timeLeft} setTimeLeft={setTimeLeft} setStartTime={setStartTime} />
+            {showTimer ? 
+                <Timer timeLeft={timeLeft} setTimeLeft={setTimeLeft} hours={timeLeft.hours} minutes={timeLeft.minutes} seconds={timeLeft.seconds} />
+            :
+                <Button variant="info" size="sm" onClick={() => setShowTimerForm(true)}>Set Timer</Button>
+            }
             <MoodSelect id="mood_before" setMood={setMoodBefore} mood={moodBefore} />
             <div className="input_container">
                 <input 
