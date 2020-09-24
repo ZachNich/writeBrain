@@ -36,7 +36,7 @@ const Login = props => {
                     <Modal.Title>Log In</Modal.Title>}
                 </Modal.Header>
                 <Modal.Body>
-                    <AuthForm showRegister={showRegister} setIsAuthenticated={props.setIsAuthenticated} />
+                    <AuthForm showRegister={showRegister} setIsAuthenticated={props.setIsAuthenticated} handleClose={handleClose} />
                 </Modal.Body>
             </Modal>
             {props.isAuthenticated ? 

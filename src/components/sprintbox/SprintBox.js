@@ -106,13 +106,15 @@ const SprintBox = props => {
                         Create Story
                     </Dropdown.Item>
                     <Dropdown.Divider />
-                    {stories.map(story => {
-                        return (
-                            <Dropdown.Item eventKey={story.id} onClick={() => setSelectedStory(story)}>
-                                {story.title}
-                            </Dropdown.Item>
-                        ) 
-                    })}
+                    {stories.length > 0 &&
+                        stories.map(story => {
+                            return (
+                                <Dropdown.Item eventKey={story.id} onClick={() => setSelectedStory(story)}>
+                                    {story.title}
+                                </Dropdown.Item>
+                            )
+                        })
+                    }
                 </DropdownButton>
                 <Alert variant="danger" show={showAlert} dismissible onClose={() => setShowAlert(false)}>
                     Please choose a Story to house your Sprint before submission.
