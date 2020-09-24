@@ -8,6 +8,7 @@ const AuthForm = props => {
     const [user, setUser] = useState({})
 
     const setIsAuthenticated = props.setIsAuthenticated
+    const handleClose = props.handleClose
 
     const handleLogin = props => {
         ApiManager.login(user)
@@ -15,6 +16,7 @@ const AuthForm = props => {
             if ("valid" in response && response.valid && "token" in response) {
                     setIsAuthenticated(true)
                     localStorage.setItem("writeBrain_token", response.token)
+                    handleClose()
                 }
             })
         }
@@ -25,6 +27,7 @@ const AuthForm = props => {
                 if ("token" in response) {
                     setIsAuthenticated(true)
                     localStorage.setItem("writeBrain_token", response.token)
+                    handleClose()
                 }
             })
     }

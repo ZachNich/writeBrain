@@ -7,17 +7,8 @@ import StoryBar from '../storybar/StoryBar'
 import SprintView from '../sprintview/SprintView'
 
 const App = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [isAuthenticated, setIsAuthenticated] = useState(localStorage.writeBrain_token !== undefined)
   const [sprint, setSprint] = useState({body: "", started_at: "", ended_at: ""})
-
-  const checkInitialAuth = () => {
-    const auth = localStorage.writeBrain_token !== null
-    setIsAuthenticated(auth)
-  }
-
-  useEffect(() => {
-    checkInitialAuth()
-  }, [])
 
   return (
     <>
