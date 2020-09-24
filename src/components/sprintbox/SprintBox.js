@@ -42,11 +42,13 @@ const SprintBox = props => {
     }
 
     const saveSprint = e => {
+        const ended_at = new Date()
         if (selectedStory.id) {
             if (moodBefore.id && moodAfter.id) {
                 const sprint = {
                     body: input,
                     started_at: startTime,
+                    ended_at: ended_at,
                     story_id: selectedStory.id,
                     mood_before_id: moodBefore.id,
                     mood_after_id: moodAfter.id

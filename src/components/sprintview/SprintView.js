@@ -22,11 +22,11 @@ const SprintView = props => {
     return (
         <div className="sprint_view">
             <div className="sprint_stats">
-                <div className="sprint_stat_icon">{props.sprint.mood_before.name}</div>
-                <div className="sprint_stat_icon">{props.sprint.mood_after.name}</div>
-                <div className="sprint_stat_icon">{props.sprint.body.split(" ").length}</div>
-                {/* <div className="sprint_stat_icon">{(props.sprint.ended_at - props.sprint.started_at) / props.sprint.body.split(" ").length}</div> */}
-                {/* <div className="sprint_stat_icon">{props.sprint.ended_at - props.sprint.started_at}</div> */}
+                <div className="sprint_stat_icon">Mood Before: {props.sprint.mood_before.name}</div>
+                <div className="sprint_stat_icon">Mood After: {props.sprint.mood_after.name}</div>
+                <div className="sprint_stat_icon">Word Count: {props.sprint.body.split(" ").length}</div>
+                <div className="sprint_stat_icon">Sprint Time: ~{Math.round((new Date(props.sprint.ended_at) - new Date(props.sprint.started_at)) / 60000)}m</div>
+                <div className="sprint_stat_icon">WPM: ~{props.sprint.body.split(" ").length / (Math.round((new Date(props.sprint.ended_at) - new Date(props.sprint.started_at)) / 60000))}</div>
             </div>
             <Card body>
                 {props.sprint.body}
