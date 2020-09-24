@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { Route, Redirect } from 'react-router-dom'
 import './App.css'
 import SprintBox from '../sprintbox/SprintBox'
@@ -19,7 +19,7 @@ const App = () => {
             <SprintBox sprint={sprint} />
           </>
         }/>
-      {sprint.id ? 
+      {sprint.id ?
         <Route path="/sprints/:sprintId" render={props => 
             <>
               <StoryBar setSprint={setSprint} {...props} />

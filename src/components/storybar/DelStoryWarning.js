@@ -30,6 +30,7 @@ const DelStoryWarning = props => {
     }
 
     useEffect(() => {
+        props.getStories()
         props.getSprints()
     }, [props.showWarning])
 
