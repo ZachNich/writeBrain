@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { Route, Redirect } from 'react-router-dom'
-import './App.css'
 import SprintBox from '../sprintbox/SprintBox'
 import Login from '../login/Login'
 import StoryBar from '../storybar/StoryBar'
@@ -25,9 +24,11 @@ const App = () => {
         }/>
       {sprint.id ?
         <Route path="/sprints/:sprintId" render={props => 
-            <div className="row">
-              <StoryBar isAuthenticated={isAuthenticated} setSprint={setSprint} {...props}  />
-              <SprintView isAuthenticated={isAuthenticated} sprint={sprint} {...props}  />
+            <div className="container">
+              <div className="d-flex justify-content-between">
+                <StoryBar isAuthenticated={isAuthenticated} setSprint={setSprint} {...props}  />
+                <SprintView isAuthenticated={isAuthenticated} sprint={sprint} {...props}  />
+              </div>
             </div>
           }/>
       :
