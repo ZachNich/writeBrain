@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import Alert from 'react-bootstrap/Alert'
 import Button from 'react-bootstrap/Button'
-import SplitButton from 'react-bootstrap/SplitButton'
-import Dropdown from 'react-bootstrap/Dropdown'
 import ApiManager from '../../api/module'
+import Form from 'react-bootstrap/Form'
 
 const DelStoryWarning = props => {
-    const [selectedStory, setSelectedStory] = useState({title: "", description: ""})
+    const [selectedStoryId, setSelectedStoryId] = useState()
 
     const handleCloseWarning = () => props.setShowWarning(false)
 
@@ -15,18 +14,18 @@ const DelStoryWarning = props => {
             .then(props.getStories)
     }
 
-    const handleStorySelect = story => {
-        setSelectedStory(story)
-    }
-
-    const moveSprints = story => {
+    const moveSprints = storyId => {
         props.sprints.forEach(sprint => {
-            sprint["story_id"] = story.id
+            sprint["story_id"] = storyId
             ApiManager.updateSprint(sprint)
                 .then(null)
         })
         props.getStories()
         handleCloseWarning()
+    }
+
+    const handleSelect = e => {
+        setSelectedStoryId(e.target.value)
     }
 
     useEffect(() => {
@@ -43,13 +42,16 @@ const DelStoryWarning = props => {
                 <p>
                     If you'd like to keep your sprints, please reassign them to another story before deleting the current story. If you'd like to delete this story and all of its related sprints, click Delete Story. This action is irreversible.
                 </p>
-                <SplitButton variant="primary" onClick={() => moveSprints(selectedStory)} size="sm" title="Move Sprints">
-                    {props.stories.map(story => 
-                        <Dropdown.Item eventKey={story.id} onClick={() => handleStorySelect(story)}>
-                            {story.title} 
-                        </Dropdown.Item>
-                    )}
-                </SplitButton>
+                <Form.Group>
+                    <Form.Control as="select" size="sm" placeholder="Select Story" onChange={handleSelect}>
+                        {props.stories.map(story => 
+                            <option value={story.id}>
+                                {story.title}
+                            </option>
+                        )}
+                    </Form.Control>
+                    <Button onClick={() => moveSprints(selectedStoryId)}>Move Sprints</Button>
+                </Form.Group>
                 <Button variant="danger" onClick={handleDelete} size="sm">Delete Story</Button>
             </Alert>
         )
