@@ -17,24 +17,26 @@ const StoryBar = props => {
             .then(setStories)
     }
 
-    return (
-        <div className="col-xs-4">
-            <StoryForm show={show} setShow={setShow} getStories={getStories} />
-            <Accordion>
-                <Card>
-                    <Accordion.Toggle as={Card.Header} eventKey="0" onClick={getStories}>
-                        My Stories
-                    </Accordion.Toggle>
-                    <Accordion.Collapse eventKey="0">
-                        <Card.Body>
-                            <Button variant="info" size="sm" onClick={handleShow}>Create Story</Button>
-                        </Card.Body>
-                    </Accordion.Collapse>
-                    {stories.map(story => <StoryCard setSprint={props.setSprint} getStories={getStories} stories={stories} story={story} {...props} />)}
-                </Card>
-            </Accordion>
-        </div>
-    )
+    if (props.isAuthenticated) {
+        return (
+            <div className="col-xs-4">
+                <StoryForm show={show} setShow={setShow} getStories={getStories} />
+                <Accordion>
+                    <Card>
+                        <Accordion.Toggle as={Card.Header} eventKey="0" onClick={getStories}>
+                            My Stories
+                        </Accordion.Toggle>
+                        <Accordion.Collapse eventKey="0">
+                            <Card.Body>
+                                <Button variant="info" size="sm" onClick={handleShow}>Create Story</Button>
+                            </Card.Body>
+                        </Accordion.Collapse>
+                        {stories.map(story => <StoryCard isAuthenticated={props.isAuthenticated} setSprint={props.setSprint} getStories={getStories} stories={stories} story={story} {...props} />)}
+                    </Card>
+                </Accordion>
+            </div>
+        )
+    } else return null
 }
 
 export default StoryBar

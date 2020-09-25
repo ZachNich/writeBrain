@@ -18,16 +18,16 @@ const App = () => {
               <Login isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} className="col-xs-12"/>
             </div>
             <div className="d-flex justify-content-between">
-              <StoryBar setSprint={setSprint} {...props} />
-              <SprintBox sprint={sprint} />
+              <StoryBar isAuthenticated={isAuthenticated} setSprint={setSprint} {...props} />
+              <SprintBox isAuthenticated={isAuthenticated} sprint={sprint} />
             </div>
           </div>
         }/>
       {sprint.id ?
         <Route path="/sprints/:sprintId" render={props => 
             <div className="row">
-              <StoryBar setSprint={setSprint} {...props}  />
-              <SprintView sprint={sprint} {...props}  />
+              <StoryBar isAuthenticated={isAuthenticated} setSprint={setSprint} {...props}  />
+              <SprintView isAuthenticated={isAuthenticated} sprint={sprint} {...props}  />
             </div>
           }/>
       :

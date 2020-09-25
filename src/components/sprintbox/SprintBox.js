@@ -77,58 +77,62 @@ const SprintBox = props => {
 
     useEffect(() => {
         getStories()
-    }, [])
+    }, [props.isAuthenticated])
 
-    return (
-        <div className="col-xs-8">
-            <StoryForm show={showForm} setShow={setShowForm} />
-            <TimerForm show={showTimerForm} setShow={setShowTimerForm} setShowTimer={setShowTimer} timeLeft={timeLeft} setTimeLeft={setTimeLeft} setStartTime={setStartTime} />
-            {showTimer ? 
-                <Timer timeLeft={timeLeft} setTimeLeft={setTimeLeft} hours={timeLeft.hours} minutes={timeLeft.minutes} seconds={timeLeft.seconds} setShowTimer={setShowTimer} />
-            :
-                <Button variant="info" size="sm" onClick={() => setShowTimerForm(true)}>Set Timer</Button>
-            }
-            <MoodSelect id="mood_before" setMood={setMoodBefore} mood={moodBefore} />
-            <div className="input_container">
-                <textarea 
-                    className="sprint_input" 
-                    style={{resize: "none", padding: "5px 0 5px 0"}}
-                    rows="10"
-                    cols="50"
-                    maxLength="500000" 
-                    placeholder="Write your sprint here"
-                    onChange={handleFieldChange}
-                    value={input}
-                />
+    if (props.isAuthenticated) {
+        return (
+            <div className="col-xs-8">
+                <StoryForm show={showForm} setShow={setShowForm} />
+                <TimerForm show={showTimerForm} setShow={setShowTimerForm} setShowTimer={setShowTimer} timeLeft={timeLeft} setTimeLeft={setTimeLeft} setStartTime={setStartTime} />
+                {showTimer ? 
+                    <Timer timeLeft={timeLeft} setTimeLeft={setTimeLeft} hours={timeLeft.hours} minutes={timeLeft.minutes} seconds={timeLeft.seconds} setShowTimer={setShowTimer} />
+                :
+                    <Button variant="info" size="sm" onClick={() => setShowTimerForm(true)}>Set Timer</Button>
+                }
+                <MoodSelect id="mood_before" setMood={setMoodBefore} mood={moodBefore} />
+                <div className="input_container">
+                    <textarea 
+                        className="sprint_input" 
+                        style={{resize: "none", padding: "5px 0 5px 0"}}
+                        rows="10"
+                        cols="50"
+                        maxLength="500000" 
+                        placeholder="Write your sprint here"
+                        onChange={handleFieldChange}
+                        value={input}
+                    />
+                </div>
+                <div className="d-flex justify-content-between">
+                    <MoodSelect id="mood_after" setMood={setMoodAfter} mood={moodAfter} />
+                    <DropdownButton variant="light" title={selectedStory.title} size="sm" onClick={getStories}>
+                        <Dropdown.Item eventKey="0" onClick={() => setShowForm(true)}>
+                            Create Story
+                        </Dropdown.Item>
+                        <Dropdown.Divider />
+                        {stories.length > 0 &&
+                            stories.map(story => {
+                                return (
+                                    <Dropdown.Item eventKey={story.id} onClick={() => setSelectedStory(story)}>
+                                        {story.title}
+                                    </Dropdown.Item>
+                                )
+                            })
+                        }
+                    </DropdownButton>
+                    <Button variant="outline-success" size="sm" onClick={saveSprint}>Submit</Button>
+                    <Button variant="outline-danger" size="sm" onClick={clearSprint}>Clear</Button>
+                </div>
+                <div className="row">
+                    <Alert variant="danger" show={showAlert} dismissible onClose={() => setShowAlert(false)}>
+                        Please choose a Story to house your Sprint before submission.
+                    </Alert>
+                    <Alert variant="danger" show={showMoodAlert} dismissible onClose={() => setShowMoodAlert(false)}>
+                        Please select your mood before and after writing your sprint before submission.
+                    </Alert>
+                </div>
             </div>
-            <div className="d-flex justify-content-between">
-                <MoodSelect id="mood_after" setMood={setMoodAfter} mood={moodAfter} />
-                <DropdownButton variant="light" title={selectedStory.title} size="sm" onClick={getStories}>
-                    <Dropdown.Item eventKey="0" onClick={() => setShowForm(true)}>
-                        Create Story
-                    </Dropdown.Item>
-                    <Dropdown.Divider />
-                    {stories.length > 0 &&
-                        stories.map(story => {
-                            return (
-                                <Dropdown.Item eventKey={story.id} onClick={() => setSelectedStory(story)}>
-                                    {story.title}
-                                </Dropdown.Item>
-                            )
-                        })
-                    }
-                </DropdownButton>
-                <Button variant="outline-success" size="sm" onClick={saveSprint}>Submit</Button>
-                <Button variant="outline-danger" size="sm" onClick={clearSprint}>Clear</Button>
-            </div>
-            <Alert variant="danger" show={showAlert} dismissible onClose={() => setShowAlert(false)}>
-                Please choose a Story to house your Sprint before submission.
-            </Alert>
-            <Alert variant="danger" show={showMoodAlert} dismissible onClose={() => setShowMoodAlert(false)}>
-                Please select your mood before and after writing your sprint before submission.
-            </Alert>
-        </div>
-    )
+        )
+    } else return null
 }
 
 export default SprintBox
