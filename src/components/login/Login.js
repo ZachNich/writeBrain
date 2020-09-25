@@ -24,6 +24,7 @@ const Login = props => {
     const handleLogout = () => {
         localStorage.removeItem("writeBrain_token")
         props.setIsAuthenticated(false)
+        props.history.push("/")
     }
 
     return (
