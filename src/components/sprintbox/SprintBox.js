@@ -80,7 +80,7 @@ const SprintBox = props => {
     }, [])
 
     return (
-        <>
+        <div className="col-xs-8">
             <StoryForm show={showForm} setShow={setShowForm} />
             <TimerForm show={showTimerForm} setShow={setShowTimerForm} setShowTimer={setShowTimer} timeLeft={timeLeft} setTimeLeft={setTimeLeft} setStartTime={setStartTime} />
             {showTimer ? 
@@ -90,16 +90,21 @@ const SprintBox = props => {
             }
             <MoodSelect id="mood_before" setMood={setMoodBefore} mood={moodBefore} />
             <div className="input_container">
-                <input 
+                <textarea 
                     className="sprint_input" 
-                    type="textarea" 
+                    style={{resize: "none"}}
+                    rows="10"
+                    cols="50"
                     maxLength="500000" 
                     placeholder="Write your sprint here"
                     onChange={handleFieldChange}
                     value={input}
                 />
+            </div>
+            <div className="row">
                 <Button variant="outline-success" size="sm" onClick={saveSprint}>Submit</Button>
                 <Button variant="outline-danger" size="sm" onClick={clearSprint}>Clear</Button>
+            </div>
                 <MoodSelect id="mood_after" setMood={setMoodAfter} mood={moodAfter} />
                 <DropdownButton variant="light" title={selectedStory.title} size="sm" onClick={getStories}>
                     <Dropdown.Item eventKey="0" onClick={() => setShowForm(true)}>
@@ -122,8 +127,7 @@ const SprintBox = props => {
                 <Alert variant="danger" show={showMoodAlert} dismissible onClose={() => setShowMoodAlert(false)}>
                     Please select your mood before and after writing your sprint before submission.
                 </Alert>
-            </div>
-        </>
+        </div>
     )
 }
 

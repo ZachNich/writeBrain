@@ -18,7 +18,7 @@ const StoryBar = props => {
     }
 
     return (
-        <>
+        <div className="col-xs-4">
             <StoryForm show={show} setShow={setShow} getStories={getStories} />
             <Accordion>
                 <Card>
@@ -33,7 +33,7 @@ const StoryBar = props => {
                     {stories.map(story => <StoryCard setSprint={props.setSprint} getStories={getStories} stories={stories} story={story} {...props} />)}
                 </Card>
             </Accordion>
-        </>
+        </div>
     )
 }
 

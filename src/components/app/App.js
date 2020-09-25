@@ -13,18 +13,22 @@ const App = () => {
   return (
     <>
       <Route exact path="/" render={props => 
-          <>
-            <Login isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />
-            <StoryBar setSprint={setSprint} {...props} />
-            <SprintBox sprint={sprint} />
-          </>
+          <div className="container">
+            <div className="d-flex flex-row-reverse">
+              <Login isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} className="col-xs-12"/>
+            </div>
+            <div className="d-flex justify-content-between">
+              <StoryBar setSprint={setSprint} {...props} />
+              <SprintBox sprint={sprint} />
+            </div>
+          </div>
         }/>
       {sprint.id ?
         <Route path="/sprints/:sprintId" render={props => 
-            <>
-              <StoryBar setSprint={setSprint} {...props} />
-              <SprintView sprint={sprint} {...props} />
-            </>
+            <div className="row">
+              <StoryBar setSprint={setSprint} {...props}  />
+              <SprintView sprint={sprint} {...props}  />
+            </div>
           }/>
       :
         <Route path="/sprints/:sprintId">
