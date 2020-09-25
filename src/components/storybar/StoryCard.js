@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import ApiManager from '../../api/module'
 import Card from 'react-bootstrap/Card'
 import Accordion from 'react-bootstrap/Accordion'
@@ -19,6 +19,10 @@ const StoryCard = props => {
         ApiManager.getSprintsByStory(props.story.id)
             .then(setSprints)
     }
+
+    useEffect(() => {
+        getSprints()
+    }, [props.isAuthenticated])
 
     return (
         <>

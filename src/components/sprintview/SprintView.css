@@ -1,9 +1,0 @@
-.sprint_stats {
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-around;
-}
-
-.sprint_stat_icon {
-    padding: .2em
-}

@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 import Alert from 'react-bootstrap/Alert'
-import './SprintView.css'
 import ApiManager from '../../api/module'
 
 const SprintView = props => {
@@ -20,13 +19,28 @@ const SprintView = props => {
     }
 
     return (
-        <div className="sprint_view">
-            <div className="sprint_stats">
-                <div className="sprint_stat_icon">Mood Before: {props.sprint.mood_before.name}</div>
-                <div className="sprint_stat_icon">Mood After: {props.sprint.mood_after.name}</div>
-                <div className="sprint_stat_icon">Word Count: {props.sprint.body.split(" ").length}</div>
-                <div className="sprint_stat_icon">Sprint Time: ~{Math.round((new Date(props.sprint.ended_at) - new Date(props.sprint.started_at)) / 60000)}m</div>
-                <div className="sprint_stat_icon">WPM: ~{props.sprint.body.split(" ").length / (Math.round((new Date(props.sprint.ended_at) - new Date(props.sprint.started_at)) / 60000))}</div>
+        <div className="col-xs-8">
+            <div className="d-flex justify-content-around">
+                <div className="col xs-2">
+                    <p style={{margin: "unset"}}>Mood Before:</p> 
+                    <p style={{margin: "unset"}}>{props.sprint.mood_before.name}</p>
+                </div>
+                <div className="col xs-2">
+                    <p style={{margin: "unset"}}>Mood After:</p> 
+                    <p style={{margin: "unset"}}>{props.sprint.mood_after.name}</p>
+                </div>
+                <div className="col xs-2">
+                    <p style={{margin: "unset"}}>Word Count:</p> 
+                    <p style={{margin: "unset"}}>{props.sprint.body.split(" ").length}</p>
+                </div>
+                <div className="col xs-2">
+                    <p style={{margin: "unset"}}>Sprint Time:</p> 
+                    <p style={{margin: "unset"}}>~{Math.round((new Date(props.sprint.ended_at) - new Date(props.sprint.started_at)) / 60000)}m</p>
+                </div>
+                <div className="col xs-2">
+                    <p style={{margin: "unset"}}>WPM:</p> 
+                    <p style={{margin: "unset"}}>~{props.sprint.body.split(" ").length / (Math.round((new Date(props.sprint.ended_at) - new Date(props.sprint.started_at)) / 60000))}</p>
+                </div>
             </div>
             <Card body>
                 {props.sprint.body}

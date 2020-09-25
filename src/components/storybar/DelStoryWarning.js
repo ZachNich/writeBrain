@@ -50,7 +50,7 @@ const DelStoryWarning = props => {
                             </option>
                         )}
                     </Form.Control>
-                    <Button onClick={() => moveSprints(selectedStoryId)}>Move Sprints</Button>
+                    <Button size="sm" onClick={() => moveSprints(selectedStoryId)}>Move Sprints</Button>
                 </Form.Group>
                 <Button variant="danger" onClick={handleDelete} size="sm">Delete Story</Button>
             </Alert>
