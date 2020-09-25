@@ -31,22 +31,14 @@ const TimerForm = props => {
                 Set Sprint Timer
             </Modal.Header>
             <Modal.Body>
-                <Form>
-                    <Form.Row>
-                        <Col>
-                            <input type="number" id="timer-hours" placeholder="hours" onChange={handleFieldChange} min="0" />
-                        </Col>
-                        <Col>
-                            <input type="number" id="timer-minutes" placeholder="minutes" onChange={handleFieldChange} min={0} max={59} />
-                        </Col>
-                        <Col>
-                            <input type="number" id="timer-seconds" placeholder="seconds" onChange={handleFieldChange} min="0" max="59" />
-                        </Col>
+                <Form className="container">
+                    <Form.Row className="d-flex" style={{"padding-bottom": "5px"}}>
+                        <input type="number" id="timer-hours" placeholder="hours" onChange={handleFieldChange} min="0" max="59" style={{width: "100px", "margin-right": "5px"}} />
+                        <input type="number" id="timer-minutes" placeholder="minutes" onChange={handleFieldChange} min="0" max="59" style={{width: "100px", "margin-right": "5px"}} />
+                        <input type="number" id="timer-seconds" placeholder="seconds" onChange={handleFieldChange} min="0" max="59" style={{width: "100px"}} />
                     </Form.Row>
-                    <Form.Row>
-                        <Col>
-                            <Button onClick={startSprint}>Set Timer & Start Sprint</Button>
-                        </Col>
+                    <Form.Row className="d-flex">
+                        <Button onClick={startSprint} size="sm">Set Timer & Start Sprint</Button>
                     </Form.Row>
                 </Form>
             </Modal.Body>
