@@ -38,15 +38,6 @@ const Timer = props => {
         }
     }
 
-    const resetTimer = () => {
-        props.setTimeLeft({
-            hours: 0,
-            minutes: 0,
-            seconds: 0
-        })
-        setOver(false)
-    }
-
     useInterval(() => countdown(), 1000)
 
     useEffect(() => {
