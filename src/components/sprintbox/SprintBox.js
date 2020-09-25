@@ -92,7 +92,7 @@ const SprintBox = props => {
             <div className="input_container">
                 <textarea 
                     className="sprint_input" 
-                    style={{resize: "none"}}
+                    style={{resize: "none", padding: "5px 0 5px 0"}}
                     rows="10"
                     cols="50"
                     maxLength="500000" 
@@ -101,10 +101,7 @@ const SprintBox = props => {
                     value={input}
                 />
             </div>
-            <div className="row">
-                <Button variant="outline-success" size="sm" onClick={saveSprint}>Submit</Button>
-                <Button variant="outline-danger" size="sm" onClick={clearSprint}>Clear</Button>
-            </div>
+            <div className="d-flex justify-content-between">
                 <MoodSelect id="mood_after" setMood={setMoodAfter} mood={moodAfter} />
                 <DropdownButton variant="light" title={selectedStory.title} size="sm" onClick={getStories}>
                     <Dropdown.Item eventKey="0" onClick={() => setShowForm(true)}>
@@ -121,12 +118,15 @@ const SprintBox = props => {
                         })
                     }
                 </DropdownButton>
-                <Alert variant="danger" show={showAlert} dismissible onClose={() => setShowAlert(false)}>
-                    Please choose a Story to house your Sprint before submission.
-                </Alert>
-                <Alert variant="danger" show={showMoodAlert} dismissible onClose={() => setShowMoodAlert(false)}>
-                    Please select your mood before and after writing your sprint before submission.
-                </Alert>
+                <Button variant="outline-success" size="sm" onClick={saveSprint}>Submit</Button>
+                <Button variant="outline-danger" size="sm" onClick={clearSprint}>Clear</Button>
+            </div>
+            <Alert variant="danger" show={showAlert} dismissible onClose={() => setShowAlert(false)}>
+                Please choose a Story to house your Sprint before submission.
+            </Alert>
+            <Alert variant="danger" show={showMoodAlert} dismissible onClose={() => setShowMoodAlert(false)}>
+                Please select your mood before and after writing your sprint before submission.
+            </Alert>
         </div>
     )
 }
