@@ -14,7 +14,7 @@ const App = () => {
       <Route exact path="/" render={props => 
           <div className="container">
             <div className="d-flex flex-row-reverse">
-              <Login isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} className="col-xs-12"/>
+              <Login isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} {...props} className="col-xs-12"/>
             </div>
             <div className="d-flex justify-content-between">
               <StoryBar isAuthenticated={isAuthenticated} setSprint={setSprint} {...props} />
