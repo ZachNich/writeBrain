@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Route, Redirect } from 'react-router-dom'
 import SprintBox from '../sprintbox/SprintBox'
-import Nav from '../nav/Nav'
+import Navi from '../nav/Nav'
 import StoryBar from '../storybar/StoryBar'
 import SprintView from '../sprintview/SprintView'
 
@@ -13,9 +13,7 @@ const App = () => {
     <>
       <Route exact path="/" render={props => 
           <div className="container">
-            <div className="d-flex flex-row-reverse">
-              <Nav isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} {...props}/>
-            </div>
+            <Navi isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} {...props}/>
             <div className="d-flex justify-content-between">
               <StoryBar isAuthenticated={isAuthenticated} setSprint={setSprint} {...props} />
               <SprintBox isAuthenticated={isAuthenticated} sprint={sprint} />
@@ -26,7 +24,7 @@ const App = () => {
         <Route path="/sprints/:sprintId" render={props => 
             <div className="container">
               <div className="d-flex flex-row-reverse">
-                <Nav isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} {...props} className="col-xs-12"/>
+                <Navi isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} {...props} className="col-xs-12"/>
               </div>
               <div className="d-flex justify-content-between">
                 <StoryBar isAuthenticated={isAuthenticated} setSprint={setSprint} {...props}  />

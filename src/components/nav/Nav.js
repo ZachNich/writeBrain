@@ -1,16 +1,17 @@
 import React from 'react'
 import Navbar from 'react-bootstrap/Navbar'
+import Nav from 'react-bootstrap/Nav'
 import Login from '../login/Login'
 
-const Nav = props => {
+const Navi = props => {
     return (
-        <Navbar bg="light" variant="variant">
+        <Navbar bg="light" variant="light" className="justify-content-between">
             <Navbar.Brand href="/">writeBrain</Navbar.Brand>
-            <Nav className="mr-auto">
+            <Nav>
                 <Login isAuthenticated={props.isAuthenticated} setIsAuthenticated={props.setIsAuthenticated} {...props} />
             </Nav>
         </Navbar>
     )
 }
 
-export default Nav
+export default Navi
