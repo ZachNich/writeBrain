@@ -23,9 +23,7 @@ const App = () => {
       {sprint.id ?
         <Route path="/sprints/:sprintId" render={props => 
             <div className="container">
-              <div className="d-flex flex-row-reverse">
-                <Navi isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} {...props} className="col-xs-12"/>
-              </div>
+              <Navi isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} {...props} />
               <div className="d-flex justify-content-between">
                 <StoryBar isAuthenticated={isAuthenticated} setSprint={setSprint} {...props}  />
                 <SprintView isAuthenticated={isAuthenticated} sprint={sprint} {...props}  />
