@@ -1,6 +1,8 @@
 # writeBrain
 Hey there! This is writeBrain, a place where you can do writing sprints, save them, and generate insights about what you've written.
 
+> Find the API here: https://github.com/ZachNich/writeBrain_API
+
 ## How's it work?
 There's two parts to writeBrain—writing and reviewing. 
 
